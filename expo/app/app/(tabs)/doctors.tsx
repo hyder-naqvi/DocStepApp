@@ -71,8 +71,9 @@ export default function DoctorsScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[styles.scrollContent, isWeb && styles.webContent]}
       >
+        {isWeb ? <Text style={styles.webPageTitle}>Find Doctors</Text> : null}
         {/* Specialties */}
-        <View style={styles.specialtiesSection}>
+        <View style={[styles.specialtiesSection, isWeb && styles.webFilterCard]}>
           <Text style={styles.sectionTitle}>Specialties</Text>
           <ScrollView
             horizontal
@@ -127,7 +128,11 @@ export default function DoctorsScreen() {
         {/* Doctor Cards */}
         <View style={styles.doctorsList}>
           {filteredDoctors.map((doctor) => (
-            <TouchableOpacity key={doctor.id} style={styles.doctorCard} onPress={() => router.push(`/doctor/${doctor.id}`)}>
+            <TouchableOpacity
+              key={doctor.id}
+              style={[styles.doctorCard, isWeb && styles.doctorCardWeb]}
+              onPress={() => router.push(`/doctor/${doctor.id}`)}
+            >
               <View style={styles.cardHeader}>
                 <Image source={{ uri: doctor.image }} style={styles.doctorImage} />
                 <View style={styles.cardHeaderInfo}>
@@ -255,6 +260,20 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     alignSelf: "center",
     paddingBottom: 48,
   },
+  webPageTitle: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: colors.text,
+    paddingHorizontal: 20,
+    marginBottom: 14,
+  },
+  webFilterCard: {
+    backgroundColor: colors.card,
+    borderRadius: 18,
+    marginHorizontal: 20,
+    paddingVertical: 16,
+    marginBottom: 14,
+  },
   specialtiesSection: {
     marginBottom: 20,
   },
@@ -313,6 +332,9 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   doctorsList: {
     paddingHorizontal: 20,
     gap: 16,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   doctorCard: {
     backgroundColor: colors.card,
@@ -324,6 +346,10 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     shadowRadius: 8,
     elevation: 2,
     marginBottom: 16,
+    width: "100%",
+  },
+  doctorCardWeb: {
+    width: "48.5%",
   },
   cardHeader: {
     flexDirection: "row",

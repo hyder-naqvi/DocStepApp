@@ -51,6 +51,7 @@ export default function ProfileScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[styles.scrollContent, isWeb && styles.webContent]}
       >
+        {isWeb ? <Text style={styles.webPageTitle}>Profile</Text> : null}
         {/* Header */}
         <View style={styles.header}>
           <Text style={[styles.title, { color: colors.text }]}>Profile</Text>
@@ -203,6 +204,13 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     maxWidth: 1000,
     alignSelf: "center",
     paddingBottom: 56,
+  },
+  webPageTitle: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: colors.text,
+    paddingHorizontal: 20,
+    marginBottom: 10,
   },
   header: {
     flexDirection: "row",

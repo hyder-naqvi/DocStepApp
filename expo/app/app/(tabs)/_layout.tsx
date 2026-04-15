@@ -110,6 +110,9 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     marginTop: 12,
     borderRadius: 16,
     borderWidth: 1,
+    borderColor: colors.border,
+    maxWidth: 1100,
+    alignSelf: "center",
   },
   tabBarItem: {
     paddingVertical: 4,

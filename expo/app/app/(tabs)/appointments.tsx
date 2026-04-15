@@ -63,9 +63,10 @@ export default function AppointmentsScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[styles.scrollContent, isWeb && styles.webContent]}
       >
+        {isWeb ? <Text style={styles.webPageTitle}>Appointments</Text> : null}
         {filteredAppointments.length > 0 ? (
           filteredAppointments.map((appointment) => (
-            <View key={appointment.id} style={styles.appointmentCard}>
+            <View key={appointment.id} style={[styles.appointmentCard, isWeb && styles.appointmentCardWeb]}>
               {/* Date Header */}
               <View style={styles.dateHeader}>
                 <View style={styles.dateBox}>
@@ -241,6 +242,16 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     maxWidth: 1100,
     alignSelf: "center",
     paddingBottom: 48,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 16,
+  },
+  webPageTitle: {
+    width: "100%",
+    fontSize: 32,
+    fontWeight: "800",
+    color: colors.text,
+    marginBottom: 4,
   },
   appointmentCard: {
     backgroundColor: colors.card,
@@ -252,6 +263,10 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     shadowOpacity: 0.05,
     shadowRadius: 8,
     elevation: 2,
+    width: "100%",
+  },
+  appointmentCardWeb: {
+    width: "48.8%",
   },
   dateHeader: {
     flexDirection: "row",

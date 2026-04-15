@@ -42,11 +42,19 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[styles.scrollContent, isWeb && styles.webContent]}
       >
+        {isWeb ? <Text style={styles.webPageTitle}>Dashboard</Text> : null}
         {/* Header */}
-        <View style={styles.header}>
-          <View>
-            <Text style={[styles.greeting, { color: colors.textSecondary }]}>Good morning,</Text>
-            <Text style={[styles.userName, { color: colors.text }]}>{user?.name ?? userProfile.name}</Text>
+        <View style={[styles.header, isWeb && styles.webHero]}>
+          <View style={styles.webHeroLeft}>
+            <View>
+              <Text style={[styles.greeting, { color: colors.textSecondary }]}>Good morning,</Text>
+              <Text style={[styles.userName, { color: colors.text }]}>{user?.name ?? userProfile.name}</Text>
+            </View>
+            {isWeb ? (
+              <Text style={styles.webHeroSubtitle}>
+                Your health overview, appointments, and specialists in one place.
+              </Text>
+            ) : null}
           </View>
           <TouchableOpacity style={[styles.notificationButton, { backgroundColor: colors.backgroundSecondary }]}>
             <Bell size={22} color={colors.text} />
@@ -68,7 +76,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Quick Actions */}
-        <View style={styles.quickActions}>
+        <View style={[styles.quickActions, isWeb && styles.quickActionsWeb]}>
           <TouchableOpacity style={styles.quickActionButton}>
             <View style={[styles.quickActionIcon, { backgroundColor: "#E0F2FE" }]}>
               <Video size={24} color="#0891B2" />
@@ -96,7 +104,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Upcoming Appointments */}
-        <View style={styles.section}>
+        <View style={[styles.section, isWeb && styles.sectionCard]}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Upcoming Appointments</Text>
             <TouchableOpacity onPress={() => router.push("/appointments")}>
@@ -170,7 +178,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Find by Specialty */}
-        <View style={styles.section}>
+        <View style={[styles.section, isWeb && styles.sectionCard]}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Find by Specialty</Text>
             <TouchableOpacity onPress={() => router.push("/doctors")}>
@@ -204,7 +212,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Top Rated Doctors */}
-        <View style={styles.section}>
+        <View style={[styles.section, isWeb && styles.sectionCard]}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Top Rated Doctors</Text>
             <TouchableOpacity onPress={() => router.push("/doctors")}>
@@ -275,6 +283,14 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     alignSelf: "center",
     paddingBottom: 48,
   },
+  webPageTitle: {
+    fontSize: 32,
+    fontWeight: "800",
+    color: colors.text,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    marginBottom: 10,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -282,6 +298,25 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     paddingHorizontal: 20,
     paddingTop: 8,
     paddingBottom: 16,
+  },
+  webHero: {
+    backgroundColor: colors.card,
+    borderRadius: 20,
+    marginHorizontal: 20,
+    marginTop: 6,
+    marginBottom: 20,
+    padding: 24,
+    alignItems: "flex-start",
+  },
+  webHeroLeft: {
+    gap: 8,
+  },
+  webHeroSubtitle: {
+    fontSize: 15,
+    color: colors.textSecondary,
+    maxWidth: 520,
+    lineHeight: 22,
+    marginTop: 6,
   },
   greeting: {
     fontSize: 14,
@@ -352,6 +387,13 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     paddingHorizontal: 20,
     marginBottom: 24,
   },
+  quickActionsWeb: {
+    backgroundColor: colors.card,
+    borderRadius: 20,
+    marginHorizontal: 20,
+    paddingHorizontal: 24,
+    paddingVertical: 20,
+  },
   quickActionButton: {
     alignItems: "center",
   },
@@ -370,6 +412,13 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   section: {
     marginBottom: 24,
+  },
+  sectionCard: {
+    backgroundColor: colors.card,
+    borderRadius: 20,
+    marginHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 8,
   },
   sectionHeader: {
     flexDirection: "row",
