@@ -3,21 +3,23 @@ import { StyleSheet, Text, View } from "react-native";
 
 // DocStep - 404 Not Found Screen
 import Colors from "@/constants/colors";
+import { useTheme } from "@/contexts/theme-context";
 
 export default function NotFoundScreen() {
+  const { colors } = useTheme();
   return (
     <>
       <Stack.Screen options={{ title: "Page Not Found" }} />
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.iconContainer}>
           <Text style={styles.icon}>🏥</Text>
         </View>
-        <Text style={styles.title}>Page Not Found</Text>
-        <Text style={styles.description}>
+        <Text style={[styles.title, { color: colors.text }]}>Page Not Found</Text>
+        <Text style={[styles.description, { color: colors.textSecondary }]}>
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </Text>
 
-        <Link href="/" style={styles.link}>
+        <Link href="/" style={[styles.link, { backgroundColor: colors.tint }]}>
           <Text style={styles.linkText}>Return to Home</Text>
         </Link>
       </View>

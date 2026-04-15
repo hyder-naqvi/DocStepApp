@@ -24,15 +24,17 @@ import { useRouter } from "expo-router";
 // DocStep - Home Dashboard Screen
 import Colors from "@/constants/colors";
 import { useAuth } from "@/contexts/auth-context";
+import { useTheme } from "@/contexts/theme-context";
 import { appointments, doctors, medicalSpecialties, userProfile } from "@/constants/mockData";
 
 export default function HomeScreen() {
   const router = useRouter();
   const { user } = useAuth();
+  const { colors } = useTheme();
   const upcomingAppointments = appointments.filter((a) => a.status === "upcoming");
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
@@ -40,11 +42,11 @@ export default function HomeScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Good morning,</Text>
-            <Text style={styles.userName}>{user?.name ?? userProfile.name}</Text>
+            <Text style={[styles.greeting, { color: colors.textSecondary }]}>Good morning,</Text>
+            <Text style={[styles.userName, { color: colors.text }]}>{user?.name ?? userProfile.name}</Text>
           </View>
-          <TouchableOpacity style={styles.notificationButton}>
-            <Bell size={22} color={Colors.light.text} />
+          <TouchableOpacity style={[styles.notificationButton, { backgroundColor: colors.backgroundSecondary }]}>
+            <Bell size={22} color={colors.text} />
             <View style={styles.notificationBadge} />
           </TouchableOpacity>
         </View>

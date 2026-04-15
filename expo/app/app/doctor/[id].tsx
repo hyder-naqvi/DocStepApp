@@ -23,20 +23,22 @@ import {
 import { useRouter, useLocalSearchParams } from "expo-router";
 import Colors from "@/constants/colors";
 import { doctors } from "@/constants/mockData";
+import { useTheme } from "@/contexts/theme-context";
 
 export default function DoctorDetailScreen() {
   const router = useRouter();
+  const { colors } = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
   const doctor = doctors.find((d) => d.id === id);
 
   if (!doctor) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-            <ChevronLeft size={24} color={Colors.light.text} />
+            <ChevronLeft size={24} color={colors.text} />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Doctor Not Found</Text>
+          <Text style={[styles.headerTitle, { color: colors.text }]}>Doctor Not Found</Text>
         </View>
       </SafeAreaView>
     );
@@ -47,7 +49,7 @@ export default function DoctorDetailScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
@@ -55,11 +57,11 @@ export default function DoctorDetailScreen() {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-            <ChevronLeft size={24} color={Colors.light.text} />
+            <ChevronLeft size={24} color={colors.text} />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Doctor Profile</Text>
+          <Text style={[styles.headerTitle, { color: colors.text }]}>Doctor Profile</Text>
           <TouchableOpacity style={styles.favoriteButton}>
-            <Heart size={22} color={Colors.light.textMuted} />
+            <Heart size={22} color={colors.textMuted} />
           </TouchableOpacity>
         </View>
 

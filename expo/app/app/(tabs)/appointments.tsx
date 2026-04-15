@@ -14,12 +14,14 @@ import { Video, MapPin, ChevronRight, Calendar, Clock } from "lucide-react-nativ
 import Colors from "@/constants/colors";
 import { appointments } from "@/constants/mockData";
 import { useRouter } from "expo-router";
+import { useTheme } from "@/contexts/theme-context";
 
 type TabType = "upcoming" | "completed" | "cancelled";
 
 export default function AppointmentsScreen() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabType>("upcoming");
+  const { colors } = useTheme();
 
   const filteredAppointments = appointments.filter((a) => a.status === activeTab);
 
@@ -30,11 +32,11 @@ export default function AppointmentsScreen() {
   ];
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>Appointments</Text>
-        <Text style={styles.subtitle}>Manage your medical consultations</Text>
+        <Text style={[styles.title, { color: colors.text }]}>Appointments</Text>
+        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Manage your medical consultations</Text>
       </View>
 
       {/* Tabs */}
@@ -64,7 +66,7 @@ export default function AppointmentsScreen() {
               {/* Date Header */}
               <View style={styles.dateHeader}>
                 <View style={styles.dateBox}>
-                  <Calendar size={16} color={Colors.light.tint} />
+                  <Calendar size={16} color={colors.tint} />
                   <Text style={styles.dateText}>{appointment.date}</Text>
                 </View>
                 <View
@@ -96,7 +98,7 @@ export default function AppointmentsScreen() {
                   <Text style={styles.doctorName}>{appointment.doctorName}</Text>
                   <Text style={styles.specialty}>{appointment.specialty}</Text>
                   <View style={styles.timeRow}>
-                    <Clock size={14} color={Colors.light.textMuted} />
+                    <Clock size={14} color={colors.textMuted} />
                     <Text style={styles.timeText}>
                       {appointment.time} • {appointment.duration}
                     </Text>
@@ -147,14 +149,14 @@ export default function AppointmentsScreen() {
               {appointment.status === "completed" && (
                 <TouchableOpacity style={styles.fullWidthButton}>
                   <Text style={styles.fullWidthButtonText}>View Summary</Text>
-                  <ChevronRight size={16} color={Colors.light.tint} />
+                  <ChevronRight size={16} color={colors.tint} />
                 </TouchableOpacity>
               )}
 
               {appointment.status === "cancelled" && (
                 <TouchableOpacity style={styles.fullWidthButton}>
                   <Text style={styles.fullWidthButtonText}>Book Again</Text>
-                  <ChevronRight size={16} color={Colors.light.tint} />
+                  <ChevronRight size={16} color={colors.tint} />
                 </TouchableOpacity>
               )}
             </View>
@@ -162,7 +164,7 @@ export default function AppointmentsScreen() {
         ) : (
           <View style={styles.emptyState}>
             <View style={styles.emptyIcon}>
-              <Calendar size={48} color={Colors.light.tint} />
+              <Calendar size={48} color={colors.tint} />
             </View>
             <Text style={styles.emptyTitle}>No {activeTab} appointments</Text>
             <Text style={styles.emptySubtitle}>

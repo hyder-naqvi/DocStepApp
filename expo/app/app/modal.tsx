@@ -12,8 +12,10 @@ import {
 
 // DocStep - Welcome Modal
 import Colors from "@/constants/colors";
+import { useTheme } from "@/contexts/theme-context";
 
 export default function ModalScreen() {
+  const { colors, isDark } = useTheme();
   return (
     <Modal
       animationType="fade"
@@ -22,17 +24,17 @@ export default function ModalScreen() {
       onRequestClose={() => router.back()}
     >
       <Pressable style={styles.overlay} onPress={() => router.back()}>
-        <View style={styles.modalContent}>
+        <View style={[styles.modalContent, { backgroundColor: colors.card }]}>
           <View style={styles.iconContainer}>
             <Text style={styles.icon}>👋</Text>
           </View>
-          <Text style={styles.title}>Welcome to DocStep</Text>
-          <Text style={styles.description}>
+          <Text style={[styles.title, { color: colors.text }]}>Welcome to DocStep</Text>
+          <Text style={[styles.description, { color: colors.textSecondary }]}>
             Your trusted telehealth companion. Book appointments, consult with doctors, and manage your health - all in one place.
           </Text>
 
           <TouchableOpacity
-            style={styles.closeButton}
+            style={[styles.closeButton, { backgroundColor: colors.tint }]}
             onPress={() => router.back()}
           >
             <Text style={styles.closeButtonText}>Get Started</Text>
@@ -40,7 +42,7 @@ export default function ModalScreen() {
         </View>
       </Pressable>
 
-      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
+      <StatusBar style={isDark || Platform.OS === "ios" ? "light" : "auto"} />
     </Modal>
   );
 }

@@ -11,6 +11,7 @@ import { Stethoscope, Calendar, MessageSquare, Shield } from "lucide-react-nativ
 
 // DocStep - Welcome/Onboarding Screen
 import Colors from "@/constants/colors";
+import { useTheme } from "@/contexts/theme-context";
 
 const features = [
   {
@@ -40,18 +41,19 @@ const features = [
 ];
 
 export default function WelcomeScreen() {
+  const { colors } = useTheme();
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top", "bottom"]}>
       {/* Hero Section */}
       <View style={styles.hero}>
         <View style={styles.logoContainer}>
           <View style={styles.logoIcon}>
             <Stethoscope size={40} color="#FFFFFF" />
           </View>
-          <Text style={styles.logoText}>DocStep</Text>
+          <Text style={[styles.logoText, { color: colors.text }]}>DocStep</Text>
         </View>
-        <Text style={styles.tagline}>Healthcare at your fingertips</Text>
-        <Text style={styles.subTagline}>
+        <Text style={[styles.tagline, { color: colors.text }]}>Healthcare at your fingertips</Text>
+        <Text style={[styles.subTagline, { color: colors.textSecondary }]}>
           Book appointments, consult with doctors, and manage your health journey
         </Text>
       </View>

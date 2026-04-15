@@ -20,6 +20,7 @@ import {
 import { useRouter, useLocalSearchParams } from "expo-router";
 import Colors from "@/constants/colors";
 import { doctors, timeSlots } from "@/constants/mockData";
+import { useTheme } from "@/contexts/theme-context";
 
 const days = [
   { day: "Today", date: "Today" },
@@ -35,6 +36,7 @@ type ConsultationType = "video" | "in-person";
 
 export default function BookingScreen() {
   const router = useRouter();
+  const { colors } = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
   const doctor = doctors.find((d) => d.id === id);
 
@@ -44,12 +46,12 @@ export default function BookingScreen() {
 
   if (!doctor) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-            <ChevronLeft size={24} color={Colors.light.text} />
+            <ChevronLeft size={24} color={colors.text} />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Doctor Not Found</Text>
+          <Text style={[styles.headerTitle, { color: colors.text }]}>Doctor Not Found</Text>
         </View>
       </SafeAreaView>
     );
@@ -88,13 +90,13 @@ export default function BookingScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-          <ChevronLeft size={24} color={Colors.light.text} />
+          <ChevronLeft size={24} color={colors.text} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Book Appointment</Text>
+        <Text style={[styles.headerTitle, { color: colors.text }]}>Book Appointment</Text>
         <View style={styles.placeholder} />
       </View>
 
@@ -109,7 +111,7 @@ export default function BookingScreen() {
             <Text style={styles.doctorName}>{doctor.name}</Text>
             <Text style={styles.doctorSpecialty}>{doctor.specialty}</Text>
             <View style={styles.hospitalRow}>
-              <Building2 size={14} color={Colors.light.textMuted} />
+              <Building2 size={14} color={colors.textMuted} />
               <Text style={styles.hospitalText}>{doctor.hospital}</Text>
             </View>
           </View>
@@ -242,7 +244,7 @@ export default function BookingScreen() {
               >
                 <Clock
                   size={14}
-                  color={selectedTime === time ? "#FFFFFF" : Colors.light.textMuted}
+                  color={selectedTime === time ? "#FFFFFF" : colors.textMuted}
                 />
                 <Text
                   style={[

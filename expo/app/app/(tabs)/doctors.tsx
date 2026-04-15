@@ -21,10 +21,12 @@ import {
 
 // DocStep - Find Doctors Screen
 import Colors from "@/constants/colors";
+import { useTheme } from "@/contexts/theme-context";
 import { doctors, medicalSpecialties } from "@/constants/mockData";
 
 export default function DoctorsScreen() {
   const router = useRouter();
+  const { colors } = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
 
@@ -38,27 +40,27 @@ export default function DoctorsScreen() {
   });
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>Find Doctors</Text>
-        <Text style={styles.subtitle}>Book appointments with top specialists</Text>
+        <Text style={[styles.title, { color: colors.text }]}>Find Doctors</Text>
+        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Book appointments with top specialists</Text>
       </View>
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
-          <Search size={20} color={Colors.light.textMuted} />
+          <Search size={20} color={colors.textMuted} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search doctors, specialties..."
-            placeholderTextColor={Colors.light.textMuted}
+            placeholderTextColor={colors.textMuted}
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
         </View>
         <TouchableOpacity style={styles.filterButton}>
-          <SlidersHorizontal size={20} color={Colors.light.tint} />
+          <SlidersHorizontal size={20} color={colors.tint} />
         </TouchableOpacity>
       </View>
 
