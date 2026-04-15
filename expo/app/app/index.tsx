@@ -1,10 +1,11 @@
 import { Redirect } from "expo-router";
 import { ActivityIndicator, View } from "react-native";
-import Colors from "@/constants/colors";
 import { useAuth } from "@/contexts/auth-context";
+import { useTheme } from "@/contexts/theme-context";
 
 export default function IndexScreen() {
   const { user, isLoading } = useAuth();
+  const { colors } = useTheme();
 
   if (isLoading) {
     return (
@@ -13,10 +14,10 @@ export default function IndexScreen() {
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: Colors.light.background,
+          backgroundColor: colors.background,
         }}
       >
-        <ActivityIndicator color={Colors.light.tint} size="large" />
+        <ActivityIndicator color={colors.tint} size="large" />
       </View>
     );
   }

@@ -3,16 +3,22 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AuthProvider } from "@/contexts/auth-context";
+import { ThemeProvider, useTheme } from "@/contexts/theme-context";
 
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
 
 function RootLayoutNav() {
+  const { isDark } = useTheme();
+
   return (
-    <Stack screenOptions={{ headerBackTitle: "Back" }}>
+    <>
+      <StatusBar style={isDark ? "light" : "dark"} />
+      <Stack screenOptions={{ headerBackTitle: "Back" }}>
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
@@ -35,7 +41,8 @@ function RootLayoutNav() {
           headerShown: false,
         }}
       />
-    </Stack>
+      </Stack>
+    </>
   );
 }
 
@@ -46,11 +53,13 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <GestureHandlerRootView style={styles.root}>
-          <RootLayoutNav />
-        </GestureHandlerRootView>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <GestureHandlerRootView style={styles.root}>
+            <RootLayoutNav />
+          </GestureHandlerRootView>
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

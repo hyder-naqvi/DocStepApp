@@ -77,7 +77,7 @@ export const doctors: Doctor[] = [
   },
   {
     id: "2",
-    name: "Dr. Omar Siddiqui",
+    name: "Dr. Bilal Siddiqui",
     specialty: "Pediatrics",
     image: doctorImg("1612349316228-5942a9b914c2"),
     rating: 4.8,

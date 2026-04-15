@@ -11,12 +11,14 @@ import {
   View,
 } from "react-native";
 import { Link, Redirect, useRouter } from "expo-router";
-import Colors from "@/constants/colors";
 import { useAuth } from "@/contexts/auth-context";
+import { useTheme } from "@/contexts/theme-context";
 
 export default function LoginScreen() {
   const router = useRouter();
   const { user, signIn, isLoading } = useAuth();
+  const { colors } = useTheme();
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -55,7 +57,7 @@ export default function LoginScreen() {
           <TextInput
             style={styles.input}
             placeholder="Email"
-            placeholderTextColor={Colors.light.textMuted}
+            placeholderTextColor={colors.textMuted}
             keyboardType="email-address"
             autoCapitalize="none"
             value={email}
@@ -64,7 +66,7 @@ export default function LoginScreen() {
           <TextInput
             style={styles.input}
             placeholder="Password"
-            placeholderTextColor={Colors.light.textMuted}
+            placeholderTextColor={colors.textMuted}
             secureTextEntry
             value={password}
             onChangeText={setPassword}
@@ -95,10 +97,11 @@ export default function LoginScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   content: {
     flex: 1,
@@ -112,29 +115,29 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
   },
   subtitle: {
     fontSize: 15,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   form: {
     gap: 12,
   },
   input: {
-    backgroundColor: Colors.light.card,
-    borderColor: Colors.light.border,
+    backgroundColor: colors.card,
+    borderColor: colors.border,
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 14,
     fontSize: 16,
-    color: Colors.light.text,
+    color: colors.text,
   },
   button: {
     marginTop: 4,
     borderRadius: 12,
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     paddingVertical: 14,
     alignItems: "center",
   },
@@ -147,16 +150,16 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   errorText: {
-    color: Colors.light.danger,
+    color: colors.danger,
     fontSize: 14,
   },
   footerText: {
     textAlign: "center",
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   linkText: {
-    color: Colors.light.tint,
+    color: colors.tint,
     fontWeight: "600",
   },
 });

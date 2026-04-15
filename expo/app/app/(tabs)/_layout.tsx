@@ -4,16 +4,18 @@ import React from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 
 // DocStep Telehealth App - Tab Navigation
-import Colors from "@/constants/colors";
 import { useAuth } from "@/contexts/auth-context";
+import { useTheme } from "@/contexts/theme-context";
 
 export default function TabLayout() {
   const { user, isLoading } = useAuth();
+  const { colors } = useTheme();
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
 
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator color={Colors.light.tint} size="large" />
+        <ActivityIndicator color={colors.tint} size="large" />
       </View>
     );
   }
@@ -25,8 +27,8 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.light.tint,
-        tabBarInactiveTintColor: Colors.light.tabIconDefault,
+        tabBarActiveTintColor: colors.tint,
+        tabBarInactiveTintColor: colors.tabIconDefault,
         headerShown: false,
         tabBarStyle: styles.tabBar,
         tabBarItemStyle: styles.tabBarItem,
@@ -81,17 +83,18 @@ export default function TabLayout() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   loadingContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   tabBar: {
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderTopWidth: 1,
-    borderTopColor: Colors.light.border,
+    borderTopColor: colors.border,
     height: 88,
     paddingBottom: 28,
     paddingTop: 8,
@@ -114,6 +117,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   iconContainerActive: {
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
   },
 });

@@ -207,10 +207,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
 
-          {doctors
-            .filter((doctor) => doctor.name !== "Dr. Omar Siddiqui")
-            .slice(0, 3)
-            .map((doctor) => (
+          {doctors.slice(0, 3).map((doctor) => (
             <TouchableOpacity key={doctor.id} style={styles.doctorCard} onPress={() => router.push(`/doctor/${doctor.id}`)}>
               <Image source={{ uri: doctor.image }} style={styles.doctorCardImage} />
               <View style={styles.doctorCardInfo}>

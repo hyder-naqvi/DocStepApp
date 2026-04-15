@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Switch,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -24,6 +25,7 @@ import {
 // DocStep - Profile Screen
 import Colors from "@/constants/colors";
 import { useAuth } from "@/contexts/auth-context";
+import { useTheme } from "@/contexts/theme-context";
 import { healthStats, userProfile } from "@/constants/mockData";
 
 const menuItems = [
@@ -38,23 +40,24 @@ const menuItems = [
 
 export default function ProfileScreen() {
   const { user, signOut } = useAuth();
+  const { isDark, toggleTheme, colors } = useTheme();
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>Profile</Text>
-          <TouchableOpacity style={styles.editButton}>
-            <Edit3 size={20} color={Colors.light.tint} />
+          <Text style={[styles.title, { color: colors.text }]}>Profile</Text>
+          <TouchableOpacity style={[styles.editButton, { backgroundColor: colors.backgroundSecondary }]}>
+            <Edit3 size={20} color={colors.tint} />
           </TouchableOpacity>
         </View>
 
         {/* Profile Card */}
-        <View style={styles.profileCard}>
+        <View style={[styles.profileCard, { backgroundColor: colors.card }]}>
           <View style={styles.avatarContainer}>
             <Image
               source={{ uri: userProfile.avatar }}
@@ -64,9 +67,24 @@ export default function ProfileScreen() {
               <Shield size={12} color="#FFFFFF" />
             </View>
           </View>
-          <Text style={styles.userName}>{user?.name ?? userProfile.name}</Text>
-          <Text style={styles.userEmail}>{user?.email ?? userProfile.email}</Text>
-          <Text style={styles.userPhone}>{userProfile.phone}</Text>
+          <Text style={[styles.userName, { color: colors.text }]}>{user?.name ?? userProfile.name}</Text>
+          <Text style={[styles.userEmail, { color: colors.textSecondary }]}>{user?.email ?? userProfile.email}</Text>
+          <Text style={[styles.userPhone, { color: colors.textMuted }]}>{userProfile.phone}</Text>
+        </View>
+
+        <View style={[styles.themeCard, { backgroundColor: colors.card }]}>
+          <View>
+            <Text style={[styles.themeTitle, { color: colors.text }]}>Dark Theme</Text>
+            <Text style={[styles.themeSubtitle, { color: colors.textSecondary }]}>
+              Use dark mode across app and web
+            </Text>
+          </View>
+          <Switch
+            value={isDark}
+            onValueChange={toggleTheme}
+            trackColor={{ false: colors.border, true: `${colors.tint}88` }}
+            thumbColor={isDark ? colors.tint : "#f4f3f4"}
+          />
         </View>
 
         {/* Health Stats */}
@@ -138,9 +156,9 @@ export default function ProfileScreen() {
         </View>
 
         {/* Logout */}
-        <TouchableOpacity style={styles.logoutButton} onPress={signOut}>
-          <LogOut size={20} color={Colors.light.danger} />
-          <Text style={styles.logoutText}>Log Out</Text>
+        <TouchableOpacity style={[styles.logoutButton, { backgroundColor: isDark ? "#3F1D1D" : "#FEF2F2" }]} onPress={signOut}>
+          <LogOut size={20} color={colors.danger} />
+          <Text style={[styles.logoutText, { color: colors.danger }]}>Log Out</Text>
         </TouchableOpacity>
 
         {/* Version */}
@@ -154,6 +172,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.light.background,
+  },
+  themeCard: {
+    marginHorizontal: 20,
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    marginBottom: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  themeTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  themeSubtitle: {
+    fontSize: 13,
+    marginTop: 2,
   },
   scrollContent: {
     paddingBottom: 40,
