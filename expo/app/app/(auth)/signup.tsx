@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   ActivityIndicator,
+  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -49,6 +50,11 @@ export default function SignupScreen() {
         style={styles.content}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
+        <Image
+          source={require("../../assets/images/docstep-logo.png")}
+          style={styles.logo}
+          resizeMode="contain"
+        />
         <View style={styles.header}>
           <Text style={styles.title}>Create account</Text>
           <Text style={styles.subtitle}>Sign up to book appointments in DocStep.</Text>
@@ -119,15 +125,23 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   header: {
     gap: 8,
+    alignItems: "center",
+  },
+  logo: {
+    width: 220,
+    height: 120,
+    alignSelf: "center",
   },
   title: {
     fontSize: 32,
     fontWeight: "700",
     color: colors.text,
+    textAlign: "center",
   },
   subtitle: {
     fontSize: 15,
     color: colors.textSecondary,
+    textAlign: "center",
   },
   form: {
     gap: 12,

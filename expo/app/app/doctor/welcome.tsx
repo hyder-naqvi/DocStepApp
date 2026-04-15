@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Image,
   View,
   Text,
   StyleSheet,
@@ -47,10 +48,11 @@ export default function WelcomeScreen() {
       {/* Hero Section */}
       <View style={styles.hero}>
         <View style={styles.logoContainer}>
-          <View style={styles.logoIcon}>
-            <Stethoscope size={40} color="#FFFFFF" />
-          </View>
-          <Text style={[styles.logoText, { color: colors.text }]}>DocStep</Text>
+          <Image
+            source={require("../../assets/images/docstep-logo.png")}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
         </View>
         <Text style={[styles.tagline, { color: colors.text }]}>Healthcare at your fingertips</Text>
         <Text style={[styles.subTagline, { color: colors.textSecondary }]}>
@@ -122,23 +124,13 @@ const styles = StyleSheet.create({
     paddingBottom: 32,
   },
   logoContainer: {
-    flexDirection: "row",
+    width: "100%",
     alignItems: "center",
     marginBottom: 20,
   },
-  logoIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 20,
-    backgroundColor: Colors.light.tint,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 16,
-  },
-  logoText: {
-    fontSize: 32,
-    fontWeight: "800",
-    color: Colors.light.text,
+  logoImage: {
+    width: 260,
+    height: 140,
   },
   tagline: {
     fontSize: 24,

@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import {
+  Image,
   Modal,
   Platform,
   Pressable,
@@ -25,9 +26,11 @@ export default function ModalScreen() {
     >
       <Pressable style={styles.overlay} onPress={() => router.back()}>
         <View style={[styles.modalContent, { backgroundColor: colors.card }]}>
-          <View style={styles.iconContainer}>
-            <Text style={styles.icon}>👋</Text>
-          </View>
+          <Image
+            source={require("../assets/images/docstep-logo.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />
           <Text style={[styles.title, { color: colors.text }]}>Welcome to DocStep</Text>
           <Text style={[styles.description, { color: colors.textSecondary }]}>
             Your trusted telehealth companion. Book appointments, consult with doctors, and manage your health - all in one place.
@@ -62,17 +65,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     minWidth: 300,
   },
-  iconContainer: {
-    width: 72,
-    height: 72,
-    borderRadius: 24,
-    backgroundColor: "#E0F2FE",
-    justifyContent: "center",
-    alignItems: "center",
+  logo: {
+    width: 180,
+    height: 96,
     marginBottom: 20,
-  },
-  icon: {
-    fontSize: 32,
   },
   title: {
     fontSize: 22,
