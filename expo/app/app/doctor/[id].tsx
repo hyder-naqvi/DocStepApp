@@ -28,7 +28,6 @@ import { useTheme } from "@/contexts/theme-context";
 export default function DoctorDetailScreen() {
   const router = useRouter();
   const { colors } = useTheme();
-  const styles = React.useMemo(() => createStyles(colors), [colors]);
   const { id } = useLocalSearchParams<{ id: string }>();
   const doctor = doctors.find((d) => d.id === id);
 
@@ -78,11 +77,11 @@ export default function DoctorDetailScreen() {
               <Text style={styles.reviewsText}>({doctor.reviews} reviews)</Text>
             </View>
             <View style={styles.hospitalRow}>
-              <Building2 size={14} color={colors.textMuted} />
+              <Building2 size={14} color={Colors.light.textMuted} />
               <Text style={styles.hospitalText}>{doctor.hospital}</Text>
             </View>
             <View style={styles.cityRow}>
-              <MapPin size={14} color={colors.textMuted} />
+              <MapPin size={14} color={Colors.light.textMuted} />
               <Text style={styles.cityText}>{doctor.city}</Text>
             </View>
           </View>
@@ -91,17 +90,17 @@ export default function DoctorDetailScreen() {
         {/* Stats Cards */}
         <View style={styles.statsContainer}>
           <View style={styles.statCard}>
-            <Clock size={20} color={colors.tint} />
+            <Clock size={20} color={Colors.light.tint} />
             <Text style={styles.statValue}>{doctor.experience}</Text>
             <Text style={styles.statLabel}>Experience</Text>
           </View>
           <View style={styles.statCard}>
-            <Languages size={20} color={colors.tint} />
+            <Languages size={20} color={Colors.light.tint} />
             <Text style={styles.statValue}>{doctor.languages.length}</Text>
             <Text style={styles.statLabel}>Languages</Text>
           </View>
           <View style={styles.statCard}>
-            <Star size={20} color={colors.tint} />
+            <Star size={20} color={Colors.light.tint} />
             <Text style={styles.statValue}>{doctor.rating}</Text>
             <Text style={styles.statLabel}>Rating</Text>
           </View>
@@ -130,7 +129,7 @@ export default function DoctorDetailScreen() {
           <Text style={styles.sectionTitle}>Education</Text>
           {doctor.education.map((edu, index) => (
             <View key={index} style={styles.educationRow}>
-              <GraduationCap size={18} color={colors.tint} />
+              <GraduationCap size={18} color={Colors.light.tint} />
               <Text style={styles.educationText}>{edu}</Text>
             </View>
           ))}
@@ -165,7 +164,7 @@ export default function DoctorDetailScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Next Available</Text>
           <View style={styles.availabilityCard}>
-            <Calendar size={20} color={colors.tint} />
+            <Calendar size={20} color={Colors.light.tint} />
             <Text style={styles.availabilityText}>
               {doctor.availableToday
                 ? `Available Today - ${doctor.nextAvailable}`
@@ -198,11 +197,10 @@ export default function DoctorDetailScreen() {
   );
 }
 
-const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
-  StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: Colors.light.background,
   },
   header: {
     flexDirection: "row",
@@ -216,20 +214,20 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: colors.backgroundSecondary,
+    backgroundColor: Colors.light.backgroundSecondary,
     justifyContent: "center",
     alignItems: "center",
   },
   headerTitle: {
     fontSize: 17,
     fontWeight: "600",
-    color: colors.text,
+    color: Colors.light.text,
   },
   favoriteButton: {
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: colors.backgroundSecondary,
+    backgroundColor: Colors.light.backgroundSecondary,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -238,7 +236,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   doctorCard: {
     marginHorizontal: 20,
-    backgroundColor: colors.card,
+    backgroundColor: Colors.light.card,
     borderRadius: 20,
     padding: 20,
     flexDirection: "row",
@@ -260,12 +258,12 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   doctorName: {
     fontSize: 20,
     fontWeight: "700",
-    color: colors.text,
+    color: Colors.light.text,
     marginBottom: 4,
   },
   doctorSpecialty: {
     fontSize: 14,
-    color: colors.tint,
+    color: Colors.light.tint,
     fontWeight: "500",
     marginBottom: 8,
   },
@@ -277,12 +275,12 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   ratingText: {
     fontSize: 14,
     fontWeight: "600",
-    color: colors.text,
+    color: Colors.light.text,
     marginLeft: 4,
   },
   reviewsText: {
     fontSize: 13,
-    color: colors.textMuted,
+    color: Colors.light.textMuted,
     marginLeft: 4,
   },
   hospitalRow: {
@@ -292,7 +290,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   hospitalText: {
     fontSize: 13,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
     marginLeft: 6,
   },
   cityRow: {
@@ -301,7 +299,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   cityText: {
     fontSize: 13,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
     marginLeft: 6,
   },
   statsContainer: {
@@ -312,7 +310,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   statCard: {
     flex: 1,
-    backgroundColor: colors.card,
+    backgroundColor: Colors.light.card,
     borderRadius: 16,
     padding: 16,
     alignItems: "center",
@@ -325,13 +323,13 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   statValue: {
     fontSize: 16,
     fontWeight: "700",
-    color: colors.text,
+    color: Colors.light.text,
     marginTop: 8,
     marginBottom: 2,
   },
   statLabel: {
     fontSize: 12,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
   },
   section: {
     marginTop: 24,
@@ -340,12 +338,12 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   sectionTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: colors.text,
+    color: Colors.light.text,
     marginBottom: 12,
   },
   aboutText: {
     fontSize: 15,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
     lineHeight: 24,
   },
   languagesContainer: {
@@ -356,13 +354,13 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   languageChip: {
     paddingHorizontal: 14,
     paddingVertical: 8,
-    backgroundColor: colors.backgroundSecondary,
+    backgroundColor: Colors.light.backgroundSecondary,
     borderRadius: 20,
   },
   languageText: {
     fontSize: 13,
     fontWeight: "500",
-    color: colors.text,
+    color: Colors.light.text,
   },
   educationRow: {
     flexDirection: "row",
@@ -371,7 +369,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   educationText: {
     fontSize: 14,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
     marginLeft: 10,
   },
   consultationTypes: {
@@ -380,7 +378,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   consultationType: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.card,
+    backgroundColor: Colors.light.card,
     borderRadius: 16,
     padding: 16,
     shadowColor: "#000",
@@ -403,18 +401,18 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   typeName: {
     fontSize: 15,
     fontWeight: "600",
-    color: colors.text,
+    color: Colors.light.text,
     marginBottom: 2,
   },
   typePrice: {
     fontSize: 14,
     fontWeight: "700",
-    color: colors.tint,
+    color: Colors.light.tint,
   },
   availabilityCard: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.card,
+    backgroundColor: Colors.light.card,
     borderRadius: 16,
     padding: 16,
     shadowColor: "#000",
@@ -426,7 +424,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   availabilityText: {
     fontSize: 15,
     fontWeight: "500",
-    color: colors.text,
+    color: Colors.light.text,
     marginLeft: 12,
     flex: 1,
   },
@@ -446,12 +444,12 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: colors.card,
+    backgroundColor: Colors.light.card,
     paddingHorizontal: 20,
     paddingVertical: 16,
     paddingBottom: 32,
     borderTopWidth: 1,
-    borderTopColor: colors.border,
+    borderTopColor: Colors.light.border,
     flexDirection: "row",
     alignItems: "center",
     gap: 16,
@@ -461,19 +459,19 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   priceLabel: {
     fontSize: 12,
-    color: colors.textMuted,
+    color: Colors.light.textMuted,
     marginBottom: 2,
   },
   price: {
     fontSize: 20,
     fontWeight: "700",
-    color: colors.text,
+    color: Colors.light.text,
   },
   bookButton: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: colors.tint,
+    backgroundColor: Colors.light.tint,
     paddingHorizontal: 24,
     paddingVertical: 14,
     borderRadius: 14,

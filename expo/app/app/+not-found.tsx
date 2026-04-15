@@ -7,7 +7,6 @@ import { useTheme } from "@/contexts/theme-context";
 
 export default function NotFoundScreen() {
   const { colors } = useTheme();
-  const styles = React.useMemo(() => createStyles(colors), [colors]);
   return (
     <>
       <Stack.Screen options={{ title: "Page Not Found" }} />
@@ -28,14 +27,13 @@ export default function NotFoundScreen() {
   );
 }
 
-const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
-  StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 24,
-    backgroundColor: colors.background,
+    backgroundColor: Colors.light.background,
   },
   iconContainer: {
     width: 80,
@@ -52,18 +50,18 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   title: {
     fontSize: 24,
     fontWeight: "700",
-    color: colors.text,
+    color: Colors.light.text,
     marginBottom: 8,
   },
   description: {
     fontSize: 15,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
     textAlign: "center",
     marginBottom: 32,
     lineHeight: 22,
   },
   link: {
-    backgroundColor: colors.tint,
+    backgroundColor: Colors.light.tint,
     paddingHorizontal: 32,
     paddingVertical: 14,
     borderRadius: 12,

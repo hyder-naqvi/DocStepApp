@@ -43,7 +43,6 @@ const features = [
 
 export default function WelcomeScreen() {
   const { colors } = useTheme();
-  const styles = React.useMemo(() => createStyles(colors), [colors]);
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top", "bottom"]}>
       {/* Hero Section */}
@@ -100,11 +99,11 @@ export default function WelcomeScreen() {
         <Text style={styles.trustText}>Trusted by 10,000+ patients</Text>
         <View style={styles.trustBadges}>
           <View style={styles.badge}>
-            <Shield size={14} color={colors.success} />
+            <Shield size={14} color={Colors.light.success} />
             <Text style={styles.badgeText}>HIPAA Compliant</Text>
           </View>
           <View style={styles.badge}>
-            <Shield size={14} color={colors.success} />
+            <Shield size={14} color={Colors.light.success} />
             <Text style={styles.badgeText}>Verified Doctors</Text>
           </View>
         </View>
@@ -113,11 +112,10 @@ export default function WelcomeScreen() {
   );
 }
 
-const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
-  StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: Colors.light.background,
   },
   hero: {
     alignItems: "center",
@@ -137,13 +135,13 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   tagline: {
     fontSize: 24,
     fontWeight: "700",
-    color: colors.text,
+    color: Colors.light.text,
     textAlign: "center",
     marginBottom: 12,
   },
   subTagline: {
     fontSize: 15,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
     textAlign: "center",
     lineHeight: 22,
   },
@@ -155,7 +153,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   featureItem: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.card,
+    backgroundColor: Colors.light.card,
     padding: 16,
     borderRadius: 16,
     shadowColor: "#000",
@@ -178,12 +176,12 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   featureTitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: colors.text,
+    color: Colors.light.text,
     marginBottom: 4,
   },
   featureDescription: {
     fontSize: 13,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
     lineHeight: 18,
   },
   actions: {
@@ -192,7 +190,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     marginBottom: 32,
   },
   primaryButton: {
-    backgroundColor: colors.tint,
+    backgroundColor: Colors.light.tint,
     paddingVertical: 16,
     borderRadius: 14,
     alignItems: "center",
@@ -203,7 +201,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     color: "#FFFFFF",
   },
   secondaryButton: {
-    backgroundColor: colors.backgroundSecondary,
+    backgroundColor: Colors.light.backgroundSecondary,
     paddingVertical: 16,
     borderRadius: 14,
     alignItems: "center",
@@ -211,7 +209,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   secondaryButtonText: {
     fontSize: 16,
     fontWeight: "500",
-    color: colors.text,
+    color: Colors.light.text,
   },
   trustSection: {
     alignItems: "center",
@@ -219,7 +217,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   },
   trustText: {
     fontSize: 13,
-    color: colors.textMuted,
+    color: Colors.light.textMuted,
     marginBottom: 12,
   },
   trustBadges: {
@@ -230,7 +228,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: colors.backgroundSecondary,
+    backgroundColor: Colors.light.backgroundSecondary,
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 20,
@@ -238,6 +236,6 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   badgeText: {
     fontSize: 12,
     fontWeight: "500",
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
   },
 });

@@ -17,7 +17,6 @@ import { useTheme } from "@/contexts/theme-context";
 
 export default function ModalScreen() {
   const { colors, isDark } = useTheme();
-  const styles = React.useMemo(() => createStyles(colors), [colors]);
   return (
     <Modal
       animationType="fade"
@@ -51,8 +50,7 @@ export default function ModalScreen() {
   );
 }
 
-const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
-  StyleSheet.create({
+const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.6)",
@@ -60,7 +58,7 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     alignItems: "center",
   },
   modalContent: {
-    backgroundColor: colors.card,
+    backgroundColor: Colors.light.card,
     borderRadius: 24,
     padding: 32,
     margin: 20,
@@ -75,18 +73,18 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
   title: {
     fontSize: 22,
     fontWeight: "700",
-    color: colors.text,
+    color: Colors.light.text,
     marginBottom: 12,
   },
   description: {
     textAlign: "center",
     marginBottom: 28,
-    color: colors.textSecondary,
+    color: Colors.light.textSecondary,
     lineHeight: 22,
     fontSize: 15,
   },
   closeButton: {
-    backgroundColor: colors.tint,
+    backgroundColor: Colors.light.tint,
     paddingHorizontal: 32,
     paddingVertical: 14,
     borderRadius: 12,
