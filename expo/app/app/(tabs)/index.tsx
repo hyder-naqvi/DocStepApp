@@ -23,10 +23,12 @@ import { useRouter } from "expo-router";
 
 // DocStep - Home Dashboard Screen
 import Colors from "@/constants/colors";
+import { useAuth } from "@/contexts/auth-context";
 import { appointments, doctors, medicalSpecialties, userProfile } from "@/constants/mockData";
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { user } = useAuth();
   const upcomingAppointments = appointments.filter((a) => a.status === "upcoming");
 
   return (
@@ -39,7 +41,7 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <View>
             <Text style={styles.greeting}>Good morning,</Text>
-            <Text style={styles.userName}>{userProfile.name}</Text>
+            <Text style={styles.userName}>{user?.name ?? userProfile.name}</Text>
           </View>
           <TouchableOpacity style={styles.notificationButton}>
             <Bell size={22} color={Colors.light.text} />
@@ -205,7 +207,10 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
 
-          {doctors.slice(0, 3).map((doctor) => (
+          {doctors
+            .filter((doctor) => doctor.name !== "Dr. Omar Siddiqui")
+            .slice(0, 3)
+            .map((doctor) => (
             <TouchableOpacity key={doctor.id} style={styles.doctorCard} onPress={() => router.push(`/doctor/${doctor.id}`)}>
               <Image source={{ uri: doctor.image }} style={styles.doctorCardImage} />
               <View style={styles.doctorCardInfo}>
