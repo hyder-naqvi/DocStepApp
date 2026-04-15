@@ -28,6 +28,7 @@ import { useTheme } from "@/contexts/theme-context";
 export default function DoctorDetailScreen() {
   const router = useRouter();
   const { colors } = useTheme();
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
   const { id } = useLocalSearchParams<{ id: string }>();
   const doctor = doctors.find((d) => d.id === id);
 
@@ -77,11 +78,11 @@ export default function DoctorDetailScreen() {
               <Text style={styles.reviewsText}>({doctor.reviews} reviews)</Text>
             </View>
             <View style={styles.hospitalRow}>
-              <Building2 size={14} color={Colors.light.textMuted} />
+              <Building2 size={14} color={colors.textMuted} />
               <Text style={styles.hospitalText}>{doctor.hospital}</Text>
             </View>
             <View style={styles.cityRow}>
-              <MapPin size={14} color={Colors.light.textMuted} />
+              <MapPin size={14} color={colors.textMuted} />
               <Text style={styles.cityText}>{doctor.city}</Text>
             </View>
           </View>
@@ -90,17 +91,17 @@ export default function DoctorDetailScreen() {
         {/* Stats Cards */}
         <View style={styles.statsContainer}>
           <View style={styles.statCard}>
-            <Clock size={20} color={Colors.light.tint} />
+            <Clock size={20} color={colors.tint} />
             <Text style={styles.statValue}>{doctor.experience}</Text>
             <Text style={styles.statLabel}>Experience</Text>
           </View>
           <View style={styles.statCard}>
-            <Languages size={20} color={Colors.light.tint} />
+            <Languages size={20} color={colors.tint} />
             <Text style={styles.statValue}>{doctor.languages.length}</Text>
             <Text style={styles.statLabel}>Languages</Text>
           </View>
           <View style={styles.statCard}>
-            <Star size={20} color={Colors.light.tint} />
+            <Star size={20} color={colors.tint} />
             <Text style={styles.statValue}>{doctor.rating}</Text>
             <Text style={styles.statLabel}>Rating</Text>
           </View>
@@ -129,7 +130,7 @@ export default function DoctorDetailScreen() {
           <Text style={styles.sectionTitle}>Education</Text>
           {doctor.education.map((edu, index) => (
             <View key={index} style={styles.educationRow}>
-              <GraduationCap size={18} color={Colors.light.tint} />
+              <GraduationCap size={18} color={colors.tint} />
               <Text style={styles.educationText}>{edu}</Text>
             </View>
           ))}
@@ -164,7 +165,7 @@ export default function DoctorDetailScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Next Available</Text>
           <View style={styles.availabilityCard}>
-            <Calendar size={20} color={Colors.light.tint} />
+            <Calendar size={20} color={colors.tint} />
             <Text style={styles.availabilityText}>
               {doctor.availableToday
                 ? `Available Today - ${doctor.nextAvailable}`
@@ -197,10 +198,11 @@ export default function DoctorDetailScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   header: {
     flexDirection: "row",
@@ -214,20 +216,20 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     justifyContent: "center",
     alignItems: "center",
   },
   headerTitle: {
     fontSize: 17,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
   },
   favoriteButton: {
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -236,7 +238,7 @@ const styles = StyleSheet.create({
   },
   doctorCard: {
     marginHorizontal: 20,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 20,
     padding: 20,
     flexDirection: "row",
@@ -258,12 +260,12 @@ const styles = StyleSheet.create({
   doctorName: {
     fontSize: 20,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   doctorSpecialty: {
     fontSize: 14,
-    color: Colors.light.tint,
+    color: colors.tint,
     fontWeight: "500",
     marginBottom: 8,
   },
@@ -275,12 +277,12 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginLeft: 4,
   },
   reviewsText: {
     fontSize: 13,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
     marginLeft: 4,
   },
   hospitalRow: {
@@ -290,7 +292,7 @@ const styles = StyleSheet.create({
   },
   hospitalText: {
     fontSize: 13,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginLeft: 6,
   },
   cityRow: {
@@ -299,7 +301,7 @@ const styles = StyleSheet.create({
   },
   cityText: {
     fontSize: 13,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginLeft: 6,
   },
   statsContainer: {
@@ -310,7 +312,7 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     alignItems: "center",
@@ -323,13 +325,13 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 16,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginTop: 8,
     marginBottom: 2,
   },
   statLabel: {
     fontSize: 12,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   section: {
     marginTop: 24,
@@ -338,12 +340,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 12,
   },
   aboutText: {
     fontSize: 15,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     lineHeight: 24,
   },
   languagesContainer: {
@@ -354,13 +356,13 @@ const styles = StyleSheet.create({
   languageChip: {
     paddingHorizontal: 14,
     paddingVertical: 8,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     borderRadius: 20,
   },
   languageText: {
     fontSize: 13,
     fontWeight: "500",
-    color: Colors.light.text,
+    color: colors.text,
   },
   educationRow: {
     flexDirection: "row",
@@ -369,7 +371,7 @@ const styles = StyleSheet.create({
   },
   educationText: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginLeft: 10,
   },
   consultationTypes: {
@@ -378,7 +380,7 @@ const styles = StyleSheet.create({
   consultationType: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     shadowColor: "#000",
@@ -401,18 +403,18 @@ const styles = StyleSheet.create({
   typeName: {
     fontSize: 15,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 2,
   },
   typePrice: {
     fontSize: 14,
     fontWeight: "700",
-    color: Colors.light.tint,
+    color: colors.tint,
   },
   availabilityCard: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     shadowColor: "#000",
@@ -424,7 +426,7 @@ const styles = StyleSheet.create({
   availabilityText: {
     fontSize: 15,
     fontWeight: "500",
-    color: Colors.light.text,
+    color: colors.text,
     marginLeft: 12,
     flex: 1,
   },
@@ -444,12 +446,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     paddingHorizontal: 20,
     paddingVertical: 16,
     paddingBottom: 32,
     borderTopWidth: 1,
-    borderTopColor: Colors.light.border,
+    borderTopColor: colors.border,
     flexDirection: "row",
     alignItems: "center",
     gap: 16,
@@ -459,19 +461,19 @@ const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 12,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
     marginBottom: 2,
   },
   price: {
     fontSize: 20,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
   },
   bookButton: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     paddingHorizontal: 24,
     paddingVertical: 14,
     borderRadius: 14,

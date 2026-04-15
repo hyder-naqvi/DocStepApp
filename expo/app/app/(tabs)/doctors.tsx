@@ -29,6 +29,7 @@ export default function DoctorsScreen() {
   const router = useRouter();
   const { colors } = useTheme();
   const isWeb = Platform.OS === "web";
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
 
@@ -159,11 +160,11 @@ export default function DoctorsScreen() {
 
               <View style={styles.cardDetails}>
                 <View style={styles.detailRow}>
-                  <MapPin size={16} color={Colors.light.textMuted} />
+                  <MapPin size={16} color={colors.textMuted} />
                   <Text style={styles.detailText}>{doctor.experience} experience</Text>
                 </View>
                 <View style={styles.detailRow}>
-                  <Stethoscope size={16} color={Colors.light.textMuted} />
+                  <Stethoscope size={16} color={colors.textMuted} />
                   <Text style={styles.detailText}>{doctor.languages.join(", ")}</Text>
                 </View>
               </View>
@@ -183,7 +184,7 @@ export default function DoctorsScreen() {
 
         {filteredDoctors.length === 0 && (
           <View style={styles.emptyState}>
-            <Stethoscope size={48} color={Colors.light.textMuted} />
+            <Stethoscope size={48} color={colors.textMuted} />
             <Text style={styles.emptyTitle}>No doctors found</Text>
             <Text style={styles.emptySubtitle}>
               Try adjusting your search or filters
@@ -195,10 +196,11 @@ export default function DoctorsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   header: {
     paddingHorizontal: 20,
@@ -208,12 +210,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   searchContainer: {
     flexDirection: "row",
@@ -225,7 +227,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     borderRadius: 14,
     paddingHorizontal: 16,
     height: 50,
@@ -233,14 +235,14 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 15,
-    color: Colors.light.text,
+    color: colors.text,
     marginLeft: 12,
   },
   filterButton: {
     width: 50,
     height: 50,
     borderRadius: 14,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -259,7 +261,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     paddingHorizontal: 20,
     marginBottom: 12,
   },
@@ -271,16 +273,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 24,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     marginRight: 8,
   },
   specialtyChipActive: {
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
   },
   specialtyChipText: {
     fontSize: 13,
     fontWeight: "500",
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   specialtyChipTextActive: {
     color: "#FFFFFF",
@@ -295,25 +297,25 @@ const styles = StyleSheet.create({
   resultsText: {
     fontSize: 14,
     fontWeight: "500",
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   sortButton: {
     paddingVertical: 6,
     paddingHorizontal: 12,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     borderRadius: 8,
   },
   sortText: {
     fontSize: 12,
     fontWeight: "500",
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   doctorsList: {
     paddingHorizontal: 20,
     gap: 16,
   },
   doctorCard: {
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 20,
     padding: 16,
     shadowColor: "#000",
@@ -339,12 +341,12 @@ const styles = StyleSheet.create({
   doctorName: {
     fontSize: 16,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   doctorSpecialty: {
     fontSize: 13,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 6,
   },
   ratingRow: {
@@ -355,11 +357,11 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 13,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
   },
   reviewsText: {
     fontSize: 12,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
   },
   availabilityBadge: {
     paddingHorizontal: 10,
@@ -370,21 +372,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#DCFCE7",
   },
   unavailableBadge: {
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
   },
   availabilityText: {
     fontSize: 11,
     fontWeight: "600",
   },
   availableText: {
-    color: Colors.light.success,
+    color: colors.success,
   },
   unavailableText: {
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
   },
   divider: {
     height: 1,
-    backgroundColor: Colors.light.border,
+    backgroundColor: colors.border,
     marginVertical: 14,
   },
   cardDetails: {
@@ -398,7 +400,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 13,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   cardFooter: {
     flexDirection: "row",
@@ -408,16 +410,16 @@ const styles = StyleSheet.create({
   priceContainer: {},
   priceLabel: {
     fontSize: 12,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
     marginBottom: 2,
   },
   price: {
     fontSize: 18,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
   },
   bookButton: {
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 12,
@@ -435,12 +437,12 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 18,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginTop: 16,
     marginBottom: 8,
   },
   emptySubtitle: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
 });

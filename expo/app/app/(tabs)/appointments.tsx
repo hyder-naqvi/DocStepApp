@@ -24,6 +24,7 @@ export default function AppointmentsScreen() {
   const [activeTab, setActiveTab] = useState<TabType>("upcoming");
   const { colors } = useTheme();
   const isWeb = Platform.OS === "web";
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
 
   const filteredAppointments = appointments.filter((a) => a.status === activeTab);
 
@@ -186,10 +187,11 @@ export default function AppointmentsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   header: {
     paddingHorizontal: 20,
@@ -199,12 +201,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   tabContainer: {
     flexDirection: "row",
@@ -216,16 +218,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 12,
     borderRadius: 12,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     alignItems: "center",
   },
   tabActive: {
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
   },
   tabText: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   tabTextActive: {
     color: "#FFFFFF",
@@ -241,7 +243,7 @@ const styles = StyleSheet.create({
     paddingBottom: 48,
   },
   appointmentCard: {
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 20,
     padding: 16,
     marginBottom: 16,
@@ -265,7 +267,7 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
   },
   statusBadge: {
     paddingHorizontal: 12,
@@ -279,7 +281,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#DCFCE7",
   },
   cancelledBadge: {
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
   },
   statusText: {
     fontSize: 12,
@@ -292,7 +294,7 @@ const styles = StyleSheet.create({
     color: "#10B981",
   },
   cancelledText: {
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
   },
   doctorSection: {
     flexDirection: "row",
@@ -311,12 +313,12 @@ const styles = StyleSheet.create({
   doctorName: {
     fontSize: 16,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   specialty: {
     fontSize: 13,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 6,
   },
   timeRow: {
@@ -326,7 +328,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 13,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
   },
   typeSection: {
     marginBottom: 16,
@@ -364,19 +366,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 12,
     borderRadius: 12,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     alignItems: "center",
   },
   secondaryButtonText: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
   },
   primaryButton: {
     flex: 1,
     paddingVertical: 12,
     borderRadius: 12,
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     alignItems: "center",
   },
   primaryButtonText: {
@@ -390,13 +392,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     borderRadius: 12,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     gap: 8,
   },
   fullWidthButtonText: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.tint,
+    color: colors.tint,
   },
   emptyState: {
     alignItems: "center",
@@ -415,16 +417,16 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 18,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 8,
   },
   emptySubtitle: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 24,
   },
   emptyButton: {
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     paddingHorizontal: 24,
     paddingVertical: 14,
     borderRadius: 12,

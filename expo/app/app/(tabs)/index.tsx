@@ -33,6 +33,7 @@ export default function HomeScreen() {
   const { user } = useAuth();
   const { colors } = useTheme();
   const isWeb = Platform.OS === "web";
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
   const upcomingAppointments = appointments.filter((a) => a.status === "upcoming");
 
   return (
@@ -62,7 +63,7 @@ export default function HomeScreen() {
             </Text>
           </View>
           <View style={styles.healthTipIcon}>
-            <Stethoscope size={32} color={Colors.light.tint} />
+            <Stethoscope size={32} color={colors.tint} />
           </View>
         </View>
 
@@ -235,7 +236,7 @@ export default function HomeScreen() {
                   </Text>
                 </View>
               </View>
-              <ChevronRight size={20} color={Colors.light.textMuted} />
+              <ChevronRight size={20} color={colors.textMuted} />
             </TouchableOpacity>
           ))}
         </View>
@@ -259,10 +260,11 @@ function getSpecialtyIcon(iconName: string, color: string) {
   }
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   scrollContent: {
     paddingBottom: 100,
@@ -283,19 +285,19 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 4,
   },
   userName: {
     fontSize: 24,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
   },
   notificationButton: {
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
@@ -307,12 +309,12 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: Colors.light.danger,
+    backgroundColor: colors.danger,
   },
   healthTipCard: {
     marginHorizontal: 20,
     marginBottom: 20,
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     borderRadius: 20,
     padding: 20,
     flexDirection: "row",
@@ -364,7 +366,7 @@ const styles = StyleSheet.create({
   quickActionText: {
     fontSize: 12,
     fontWeight: "500",
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   section: {
     marginBottom: 24,
@@ -379,16 +381,16 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
   },
   seeAll: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.tint,
+    color: colors.tint,
   },
   appointmentCard: {
     marginHorizontal: 20,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     marginBottom: 12,
@@ -415,12 +417,12 @@ const styles = StyleSheet.create({
   doctorName: {
     fontSize: 16,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   specialty: {
     fontSize: 13,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 6,
   },
   appointmentTime: {
@@ -429,7 +431,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 13,
-    color: Colors.light.tint,
+    color: colors.tint,
     fontWeight: "500",
   },
   typeBadge: {
@@ -464,19 +466,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 12,
     borderRadius: 12,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     alignItems: "center",
   },
   rescheduleText: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
   },
   joinButton: {
     flex: 1,
     paddingVertical: 12,
     borderRadius: 12,
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     alignItems: "center",
   },
   joinText: {
@@ -486,18 +488,18 @@ const styles = StyleSheet.create({
   },
   emptyCard: {
     marginHorizontal: 20,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 32,
     alignItems: "center",
   },
   emptyText: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 16,
   },
   bookButton: {
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 12,
@@ -526,7 +528,7 @@ const styles = StyleSheet.create({
   specialtyName: {
     fontSize: 12,
     fontWeight: "500",
-    color: Colors.light.text,
+    color: colors.text,
     textAlign: "center",
     maxWidth: 80,
   },
@@ -534,7 +536,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 20,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     marginBottom: 12,
@@ -556,12 +558,12 @@ const styles = StyleSheet.create({
   doctorCardName: {
     fontSize: 15,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   doctorCardSpecialty: {
     fontSize: 13,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 6,
   },
   ratingContainer: {
@@ -572,11 +574,11 @@ const styles = StyleSheet.create({
   ratingText: {
     fontSize: 13,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
   },
   reviewsText: {
     fontSize: 12,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
     marginLeft: 4,
   },
   availabilityRow: {
@@ -587,14 +589,14 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: Colors.light.textMuted,
+    backgroundColor: colors.textMuted,
     marginRight: 6,
   },
   availableDot: {
-    backgroundColor: Colors.light.success,
+    backgroundColor: colors.success,
   },
   availabilityText: {
     fontSize: 12,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
 });

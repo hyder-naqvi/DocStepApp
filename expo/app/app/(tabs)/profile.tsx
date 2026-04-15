@@ -43,6 +43,7 @@ export default function ProfileScreen() {
   const { user, signOut } = useAuth();
   const { isDark, toggleTheme, colors } = useTheme();
   const isWeb = Platform.OS === "web";
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
@@ -151,7 +152,7 @@ export default function ProfileScreen() {
                   </View>
                   <Text style={styles.menuLabel}>{item.label}</Text>
                 </View>
-                <ChevronRight size={20} color={Colors.light.textMuted} />
+                <ChevronRight size={20} color={colors.textMuted} />
               </TouchableOpacity>
             ))}
           </View>
@@ -170,10 +171,11 @@ export default function ProfileScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   themeCard: {
     marginHorizontal: 20,
@@ -213,19 +215,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
   },
   editButton: {
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     justifyContent: "center",
     alignItems: "center",
   },
   profileCard: {
     marginHorizontal: 20,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 20,
     padding: 24,
     alignItems: "center",
@@ -252,26 +254,26 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: Colors.light.success,
+    backgroundColor: colors.success,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 3,
-    borderColor: Colors.light.card,
+    borderColor: colors.card,
   },
   userName: {
     fontSize: 22,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   userEmail: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 4,
   },
   userPhone: {
     fontSize: 14,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
   },
   statsSection: {
     marginBottom: 20,
@@ -279,7 +281,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     paddingHorizontal: 20,
     marginBottom: 16,
   },
@@ -292,7 +294,7 @@ const styles = StyleSheet.create({
   statCard: {
     flex: 1,
     minWidth: "22%",
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     alignItems: "center",
@@ -305,12 +307,12 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 18,
     fontWeight: "700",
-    color: Colors.light.tint,
+    color: colors.tint,
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   quickStatsSection: {
     flexDirection: "row",
@@ -322,7 +324,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     shadowColor: "#000",
@@ -342,19 +344,19 @@ const styles = StyleSheet.create({
   quickStatValue: {
     fontSize: 16,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 2,
   },
   quickStatLabel: {
     fontSize: 12,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   menuSection: {
     marginBottom: 24,
   },
   menuCard: {
     marginHorizontal: 20,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -369,7 +371,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.light.border,
+    borderBottomColor: colors.border,
   },
   menuItemLast: {
     borderBottomWidth: 0,
@@ -389,7 +391,7 @@ const styles = StyleSheet.create({
   menuLabel: {
     fontSize: 15,
     fontWeight: "500",
-    color: Colors.light.text,
+    color: colors.text,
   },
   logoutButton: {
     flexDirection: "row",
@@ -404,12 +406,12 @@ const styles = StyleSheet.create({
   logoutText: {
     fontSize: 16,
     fontWeight: "600",
-    color: Colors.light.danger,
+    color: colors.danger,
   },
   version: {
     textAlign: "center",
     fontSize: 12,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
     marginTop: 20,
   },
 });

@@ -78,7 +78,7 @@ export const doctors: Doctor[] = [
     id: "2",
     name: "Dr. Bilal Siddiqui",
     specialty: "Pediatrics",
-    image: doctorImg("1612349316228-5942a9b914c2"),
+    image: "https://i.pravatar.cc/300?img=12",
     rating: 4.8,
     reviews: 189,
     availableToday: false,

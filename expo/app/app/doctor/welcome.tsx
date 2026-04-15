@@ -43,6 +43,7 @@ const features = [
 
 export default function WelcomeScreen() {
   const { colors } = useTheme();
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top", "bottom"]}>
       {/* Hero Section */}
@@ -99,11 +100,11 @@ export default function WelcomeScreen() {
         <Text style={styles.trustText}>Trusted by 10,000+ patients</Text>
         <View style={styles.trustBadges}>
           <View style={styles.badge}>
-            <Shield size={14} color={Colors.light.success} />
+            <Shield size={14} color={colors.success} />
             <Text style={styles.badgeText}>HIPAA Compliant</Text>
           </View>
           <View style={styles.badge}>
-            <Shield size={14} color={Colors.light.success} />
+            <Shield size={14} color={colors.success} />
             <Text style={styles.badgeText}>Verified Doctors</Text>
           </View>
         </View>
@@ -112,10 +113,11 @@ export default function WelcomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   hero: {
     alignItems: "center",
@@ -135,13 +137,13 @@ const styles = StyleSheet.create({
   tagline: {
     fontSize: 24,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     textAlign: "center",
     marginBottom: 12,
   },
   subTagline: {
     fontSize: 15,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     textAlign: "center",
     lineHeight: 22,
   },
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
   featureItem: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     padding: 16,
     borderRadius: 16,
     shadowColor: "#000",
@@ -176,12 +178,12 @@ const styles = StyleSheet.create({
   featureTitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   featureDescription: {
     fontSize: 13,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     lineHeight: 18,
   },
   actions: {
@@ -190,7 +192,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   primaryButton: {
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     paddingVertical: 16,
     borderRadius: 14,
     alignItems: "center",
@@ -201,7 +203,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
   secondaryButton: {
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     paddingVertical: 16,
     borderRadius: 14,
     alignItems: "center",
@@ -209,7 +211,7 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     fontSize: 16,
     fontWeight: "500",
-    color: Colors.light.text,
+    color: colors.text,
   },
   trustSection: {
     alignItems: "center",
@@ -217,7 +219,7 @@ const styles = StyleSheet.create({
   },
   trustText: {
     fontSize: 13,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
     marginBottom: 12,
   },
   trustBadges: {
@@ -228,7 +230,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 6,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 20,
@@ -236,6 +238,6 @@ const styles = StyleSheet.create({
   badgeText: {
     fontSize: 12,
     fontWeight: "500",
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
 });

@@ -37,6 +37,7 @@ type ConsultationType = "video" | "in-person";
 export default function BookingScreen() {
   const router = useRouter();
   const { colors } = useTheme();
+  const styles = React.useMemo(() => createStyles(colors), [colors]);
   const { id } = useLocalSearchParams<{ id: string }>();
   const doctor = doctors.find((d) => d.id === id);
 
@@ -298,10 +299,11 @@ export default function BookingScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: colors.background,
   },
   header: {
     flexDirection: "row",
@@ -315,14 +317,14 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: Colors.light.backgroundSecondary,
+    backgroundColor: colors.backgroundSecondary,
     justifyContent: "center",
     alignItems: "center",
   },
   headerTitle: {
     fontSize: 17,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
   },
   placeholder: {
     width: 40,
@@ -332,7 +334,7 @@ const styles = StyleSheet.create({
   },
   doctorCard: {
     marginHorizontal: 20,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 20,
     padding: 16,
     flexDirection: "row",
@@ -355,12 +357,12 @@ const styles = StyleSheet.create({
   doctorName: {
     fontSize: 16,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 2,
   },
   doctorSpecialty: {
     fontSize: 14,
-    color: Colors.light.tint,
+    color: colors.tint,
     marginBottom: 4,
   },
   hospitalRow: {
@@ -369,7 +371,7 @@ const styles = StyleSheet.create({
   },
   hospitalText: {
     fontSize: 12,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
     marginLeft: 4,
   },
   section: {
@@ -379,7 +381,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 16,
   },
   typeContainer: {
@@ -388,16 +390,16 @@ const styles = StyleSheet.create({
   },
   typeCard: {
     flex: 1,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     alignItems: "center",
     borderWidth: 2,
-    borderColor: Colors.light.border,
+    borderColor: colors.border,
     position: "relative",
   },
   typeCardActive: {
-    borderColor: Colors.light.tint,
+    borderColor: colors.tint,
   },
   typeIcon: {
     width: 48,
@@ -410,16 +412,16 @@ const styles = StyleSheet.create({
   typeName: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 4,
   },
   typeNameActive: {
-    color: Colors.light.tint,
+    color: colors.tint,
   },
   typePrice: {
     fontSize: 14,
     fontWeight: "700",
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
   },
   checkBadge: {
     position: "absolute",
@@ -428,7 +430,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -438,21 +440,21 @@ const styles = StyleSheet.create({
   dateCard: {
     width: 80,
     height: 90,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 2,
-    borderColor: Colors.light.border,
+    borderColor: colors.border,
   },
   dateCardActive: {
-    borderColor: Colors.light.tint,
-    backgroundColor: Colors.light.tint,
+    borderColor: colors.tint,
+    backgroundColor: colors.tint,
   },
   dayName: {
     fontSize: 13,
     fontWeight: "600",
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 4,
   },
   dayNameActive: {
@@ -461,7 +463,7 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 12,
     fontWeight: "500",
-    color: Colors.light.text,
+    color: colors.text,
   },
   dateTextActive: {
     color: "#FFFFFF",
@@ -477,20 +479,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 4,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 12,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: Colors.light.border,
+    borderColor: colors.border,
   },
   timeSlotActive: {
-    backgroundColor: Colors.light.tint,
-    borderColor: Colors.light.tint,
+    backgroundColor: colors.tint,
+    borderColor: colors.tint,
   },
   timeText: {
     fontSize: 12,
     fontWeight: "500",
-    color: Colors.light.text,
+    color: colors.text,
   },
   timeTextActive: {
     color: "#FFFFFF",
@@ -498,7 +500,7 @@ const styles = StyleSheet.create({
   summaryCard: {
     marginHorizontal: 20,
     marginTop: 24,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     borderRadius: 20,
     padding: 20,
     shadowColor: "#000",
@@ -510,7 +512,7 @@ const styles = StyleSheet.create({
   summaryTitle: {
     fontSize: 16,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
     marginBottom: 16,
   },
   summaryRow: {
@@ -520,39 +522,39 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 14,
-    color: Colors.light.textSecondary,
+    color: colors.textSecondary,
   },
   summaryValue: {
     fontSize: 14,
     fontWeight: "600",
-    color: Colors.light.text,
+    color: colors.text,
   },
   divider: {
     height: 1,
-    backgroundColor: Colors.light.border,
+    backgroundColor: colors.border,
     marginVertical: 12,
   },
   totalLabel: {
     fontSize: 16,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
   },
   totalValue: {
     fontSize: 18,
     fontWeight: "700",
-    color: Colors.light.tint,
+    color: colors.tint,
   },
   bottomBar: {
     position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: Colors.light.card,
+    backgroundColor: colors.card,
     paddingHorizontal: 20,
     paddingVertical: 16,
     paddingBottom: 32,
     borderTopWidth: 1,
-    borderTopColor: Colors.light.border,
+    borderTopColor: colors.border,
     flexDirection: "row",
     alignItems: "center",
     gap: 16,
@@ -562,23 +564,23 @@ const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 12,
-    color: Colors.light.textMuted,
+    color: colors.textMuted,
     marginBottom: 2,
   },
   price: {
     fontSize: 22,
     fontWeight: "700",
-    color: Colors.light.text,
+    color: colors.text,
   },
   confirmButton: {
     flex: 1.5,
-    backgroundColor: Colors.light.tint,
+    backgroundColor: colors.tint,
     paddingVertical: 16,
     borderRadius: 14,
     alignItems: "center",
   },
   confirmButtonDisabled: {
-    backgroundColor: Colors.light.textMuted,
+    backgroundColor: colors.textMuted,
   },
   confirmButtonText: {
     fontSize: 16,
