@@ -23,6 +23,7 @@ import {
 
 // DocStep - Profile Screen
 import Colors from "@/constants/colors";
+import { useAuth } from "@/contexts/auth-context";
 import { healthStats, userProfile } from "@/constants/mockData";
 
 const menuItems = [
@@ -36,6 +37,8 @@ const menuItems = [
 ];
 
 export default function ProfileScreen() {
+  const { user, signOut } = useAuth();
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <ScrollView
@@ -61,8 +64,8 @@ export default function ProfileScreen() {
               <Shield size={12} color="#FFFFFF" />
             </View>
           </View>
-          <Text style={styles.userName}>{userProfile.name}</Text>
-          <Text style={styles.userEmail}>{userProfile.email}</Text>
+          <Text style={styles.userName}>{user?.name ?? userProfile.name}</Text>
+          <Text style={styles.userEmail}>{user?.email ?? userProfile.email}</Text>
           <Text style={styles.userPhone}>{userProfile.phone}</Text>
         </View>
 
@@ -135,7 +138,7 @@ export default function ProfileScreen() {
         </View>
 
         {/* Logout */}
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity style={styles.logoutButton} onPress={signOut}>
           <LogOut size={20} color={Colors.light.danger} />
           <Text style={styles.logoutText}>Log Out</Text>
         </TouchableOpacity>

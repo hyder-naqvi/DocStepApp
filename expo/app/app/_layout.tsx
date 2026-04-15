@@ -4,6 +4,7 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { AuthProvider } from "@/contexts/auth-context";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -12,6 +13,7 @@ const queryClient = new QueryClient();
 function RootLayoutNav() {
   return (
     <Stack screenOptions={{ headerBackTitle: "Back" }}>
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
         name="modal"
@@ -44,9 +46,11 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GestureHandlerRootView style={styles.root}>
-        <RootLayoutNav />
-      </GestureHandlerRootView>
+      <AuthProvider>
+        <GestureHandlerRootView style={styles.root}>
+          <RootLayoutNav />
+        </GestureHandlerRootView>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

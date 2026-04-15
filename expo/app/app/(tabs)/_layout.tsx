@@ -1,12 +1,27 @@
-import { Tabs } from "expo-router";
+import { Redirect, Tabs, type Href } from "expo-router";
 import { Home, Search, Calendar, User } from "lucide-react-native";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { ActivityIndicator, View, StyleSheet } from "react-native";
 
 // DocStep Telehealth App - Tab Navigation
 import Colors from "@/constants/colors";
+import { useAuth } from "@/contexts/auth-context";
 
 export default function TabLayout() {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator color={Colors.light.tint} size="large" />
+      </View>
+    );
+  }
+
+  if (!user) {
+    return <Redirect href={"/(auth)/login" as Href} />;
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -67,6 +82,12 @@ export default function TabLayout() {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.light.background,
+  },
   tabBar: {
     backgroundColor: Colors.light.card,
     borderTopWidth: 1,
