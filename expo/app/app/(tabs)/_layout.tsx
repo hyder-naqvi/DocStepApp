@@ -1,7 +1,7 @@
 import { Redirect, Tabs, type Href } from "expo-router";
 import { Home, Search, Calendar, User } from "lucide-react-native";
 import React from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { ActivityIndicator, View, StyleSheet, Platform } from "react-native";
 
 // DocStep Telehealth App - Tab Navigation
 import { useAuth } from "@/contexts/auth-context";
@@ -11,6 +11,7 @@ export default function TabLayout() {
   const { user, isLoading } = useAuth();
   const { colors } = useTheme();
   const styles = React.useMemo(() => createStyles(colors), [colors]);
+  const isWeb = Platform.OS === "web";
 
   if (isLoading) {
     return (
@@ -30,7 +31,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: colors.tint,
         tabBarInactiveTintColor: colors.tabIconDefault,
         headerShown: false,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [styles.tabBar, isWeb && styles.webTabBar],
         tabBarItemStyle: styles.tabBarItem,
         tabBarLabelStyle: styles.tabBarLabel,
       }}
@@ -100,6 +101,15 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     paddingTop: 8,
     elevation: 0,
     shadowOpacity: 0,
+  },
+  webTabBar: {
+    height: 70,
+    paddingBottom: 10,
+    paddingTop: 10,
+    marginHorizontal: 24,
+    marginTop: 12,
+    borderRadius: 16,
+    borderWidth: 1,
   },
   tabBarItem: {
     paddingVertical: 4,

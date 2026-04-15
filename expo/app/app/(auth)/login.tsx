@@ -19,7 +19,8 @@ export default function LoginScreen() {
   const router = useRouter();
   const { user, signIn, isLoading } = useAuth();
   const { colors } = useTheme();
-  const styles = React.useMemo(() => createStyles(colors), [colors]);
+  const isWeb = Platform.OS === "web";
+  const styles = React.useMemo(() => createStyles(colors, isWeb), [colors, isWeb]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -49,47 +50,49 @@ export default function LoginScreen() {
         style={styles.content}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        <Image
-          source={require("../../assets/images/docstep-logo.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-        <View style={styles.header}>
-          <Text style={styles.title}>Welcome back</Text>
-          <Text style={styles.subtitle}>Login to continue using DocStep.</Text>
-        </View>
-
-        <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor={colors.textMuted}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            value={email}
-            onChangeText={setEmail}
+        <View style={styles.panel}>
+          <Image
+            source={require("../../assets/images/docstep-logo.png")}
+            style={styles.logo}
+            resizeMode="contain"
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor={colors.textMuted}
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-          />
-          {error ? <Text style={styles.errorText}>{error}</Text> : null}
+          <View style={styles.header}>
+            <Text style={styles.title}>Welcome back</Text>
+            <Text style={styles.subtitle}>Login to continue using DocStep.</Text>
+          </View>
 
-          <Pressable
-            style={[styles.button, isSubmitting && styles.buttonDisabled]}
-            onPress={handleLogin}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <ActivityIndicator color="#FFFFFF" />
-            ) : (
-              <Text style={styles.buttonText}>Login</Text>
-            )}
-          </Pressable>
+          <View style={styles.form}>
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              placeholderTextColor={colors.textMuted}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              value={email}
+              onChangeText={setEmail}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              placeholderTextColor={colors.textMuted}
+              secureTextEntry
+              value={password}
+              onChangeText={setPassword}
+            />
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+            <Pressable
+              style={[styles.button, isSubmitting && styles.buttonDisabled]}
+              onPress={handleLogin}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <ActivityIndicator color="#FFFFFF" />
+              ) : (
+                <Text style={styles.buttonText}>Login</Text>
+              )}
+            </Pressable>
+          </View>
         </View>
 
         <Text style={styles.footerText}>
@@ -103,7 +106,7 @@ export default function LoginScreen() {
   );
 }
 
-const createStyles = (colors: typeof import("@/constants/colors").default.light) =>
+const createStyles = (colors: typeof import("@/constants/colors").default.light, isWeb: boolean) =>
   StyleSheet.create({
   container: {
     flex: 1,
@@ -114,6 +117,21 @@ const createStyles = (colors: typeof import("@/constants/colors").default.light)
     justifyContent: "center",
     paddingHorizontal: 24,
     gap: 24,
+    maxWidth: isWeb ? 520 : undefined,
+    width: "100%",
+    alignSelf: "center",
+  },
+  panel: {
+    backgroundColor: colors.card,
+    borderColor: colors.border,
+    borderWidth: isWeb ? 1 : 0,
+    borderRadius: isWeb ? 20 : 0,
+    paddingHorizontal: isWeb ? 24 : 0,
+    paddingVertical: isWeb ? 24 : 0,
+    shadowColor: "#000",
+    shadowOpacity: isWeb ? 0.08 : 0,
+    shadowRadius: 14,
+    elevation: isWeb ? 2 : 0,
   },
   header: {
     gap: 8,

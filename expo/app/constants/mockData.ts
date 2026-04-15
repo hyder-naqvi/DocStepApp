@@ -53,8 +53,7 @@ export interface HealthStats {
   bloodPressure: string;
 }
 
-const doctorImg = (seed: string) =>
-  `https://images.unsplash.com/photo-${seed}?w=200&h=200&fit=crop`;
+const doctorImg = (seed: string) => `https://i.pravatar.cc/300?u=${seed}`;
 
 export const doctors: Doctor[] = [
   {

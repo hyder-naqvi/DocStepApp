@@ -25,7 +25,9 @@
       "package": "app.rork.tmqogca37vqcppx15ji4r"
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "backgroundColor": "#F3F6FA",
+      "themeColor": "#0891B2"
     },
     "plugins": [
       [

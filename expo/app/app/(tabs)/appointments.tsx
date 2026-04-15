@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Video, MapPin, ChevronRight, Calendar, Clock } from "lucide-react-native";
@@ -22,6 +23,7 @@ export default function AppointmentsScreen() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabType>("upcoming");
   const { colors } = useTheme();
+  const isWeb = Platform.OS === "web";
 
   const filteredAppointments = appointments.filter((a) => a.status === activeTab);
 
@@ -58,7 +60,7 @@ export default function AppointmentsScreen() {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, isWeb && styles.webContent]}
       >
         {filteredAppointments.length > 0 ? (
           filteredAppointments.map((appointment) => (
@@ -231,6 +233,12 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 20,
     paddingBottom: 100,
+  },
+  webContent: {
+    width: "100%",
+    maxWidth: 1100,
+    alignSelf: "center",
+    paddingBottom: 48,
   },
   appointmentCard: {
     backgroundColor: Colors.light.card,

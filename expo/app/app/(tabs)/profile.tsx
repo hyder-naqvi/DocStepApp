@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Switch,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -41,12 +42,13 @@ const menuItems = [
 export default function ProfileScreen() {
   const { user, signOut } = useAuth();
   const { isDark, toggleTheme, colors } = useTheme();
+  const isWeb = Platform.OS === "web";
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, isWeb && styles.webContent]}
       >
         {/* Header */}
         <View style={styles.header}>
@@ -193,6 +195,12 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: 40,
+  },
+  webContent: {
+    width: "100%",
+    maxWidth: 1000,
+    alignSelf: "center",
+    paddingBottom: 56,
   },
   header: {
     flexDirection: "row",

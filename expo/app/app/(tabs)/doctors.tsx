@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
   Pressable,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -27,6 +28,7 @@ import { doctors, medicalSpecialties } from "@/constants/mockData";
 export default function DoctorsScreen() {
   const router = useRouter();
   const { colors } = useTheme();
+  const isWeb = Platform.OS === "web";
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
 
@@ -66,7 +68,7 @@ export default function DoctorsScreen() {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, isWeb && styles.webContent]}
       >
         {/* Specialties */}
         <View style={styles.specialtiesSection}>
@@ -244,6 +246,12 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: 100,
+  },
+  webContent: {
+    width: "100%",
+    maxWidth: 1100,
+    alignSelf: "center",
+    paddingBottom: 48,
   },
   specialtiesSection: {
     marginBottom: 20,

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Pressable,
+  Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -31,13 +32,14 @@ export default function HomeScreen() {
   const router = useRouter();
   const { user } = useAuth();
   const { colors } = useTheme();
+  const isWeb = Platform.OS === "web";
   const upcomingAppointments = appointments.filter((a) => a.status === "upcoming");
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["top"]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, isWeb && styles.webContent]}
       >
         {/* Header */}
         <View style={styles.header}>
@@ -264,6 +266,12 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: 100,
+  },
+  webContent: {
+    width: "100%",
+    maxWidth: 1100,
+    alignSelf: "center",
+    paddingBottom: 48,
   },
   header: {
     flexDirection: "row",
