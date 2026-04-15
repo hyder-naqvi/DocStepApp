@@ -53,7 +53,8 @@ export interface HealthStats {
   bloodPressure: string;
 }
 
-const doctorImg = (seed: string) => `https://i.pravatar.cc/300?u=${seed}`;
+const doctorImg = (seed: string) =>
+  `https://images.unsplash.com/photo-${seed}?w=200&h=200&fit=crop`;
 
 export const doctors: Doctor[] = [
   {
@@ -78,7 +79,7 @@ export const doctors: Doctor[] = [
     id: "2",
     name: "Dr. Bilal Siddiqui",
     specialty: "Pediatrics",
-    image: "https://i.pravatar.cc/300?img=12",
+    image: doctorImg("1612349316228-5942a9b914c2"),
     rating: 4.8,
     reviews: 189,
     availableToday: false,
